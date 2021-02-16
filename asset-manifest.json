@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/React-base-config/static/css/main.7d180cbf.chunk.css",
-    "main.js": "/React-base-config/static/js/main.125a2522.chunk.js",
-    "main.js.map": "/React-base-config/static/js/main.125a2522.chunk.js.map",
-    "runtime-main.js": "/React-base-config/static/js/runtime-main.bd3addf9.js",
-    "runtime-main.js.map": "/React-base-config/static/js/runtime-main.bd3addf9.js.map",
-    "static/js/2.5ed0b9c8.chunk.js": "/React-base-config/static/js/2.5ed0b9c8.chunk.js",
-    "static/js/2.5ed0b9c8.chunk.js.map": "/React-base-config/static/js/2.5ed0b9c8.chunk.js.map",
-    "index.html": "/React-base-config/index.html",
-    "static/css/main.7d180cbf.chunk.css.map": "/React-base-config/static/css/main.7d180cbf.chunk.css.map",
-    "static/js/2.5ed0b9c8.chunk.js.LICENSE.txt": "/React-base-config/static/js/2.5ed0b9c8.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/React-base-config/static/media/logo.6ce24c58.svg"
+    "main.css": "/timer/static/css/main.32ee56d2.chunk.css",
+    "main.js": "/timer/static/js/main.cafcdeca.chunk.js",
+    "main.js.map": "/timer/static/js/main.cafcdeca.chunk.js.map",
+    "runtime-main.js": "/timer/static/js/runtime-main.85c1ced1.js",
+    "runtime-main.js.map": "/timer/static/js/runtime-main.85c1ced1.js.map",
+    "static/js/2.deba2e99.chunk.js": "/timer/static/js/2.deba2e99.chunk.js",
+    "static/js/2.deba2e99.chunk.js.map": "/timer/static/js/2.deba2e99.chunk.js.map",
+    "index.html": "/timer/index.html",
+    "static/css/main.32ee56d2.chunk.css.map": "/timer/static/css/main.32ee56d2.chunk.css.map",
+    "static/js/2.deba2e99.chunk.js.LICENSE.txt": "/timer/static/js/2.deba2e99.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/timer/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.bd3addf9.js",
-    "static/js/2.5ed0b9c8.chunk.js",
-    "static/css/main.7d180cbf.chunk.css",
-    "static/js/main.125a2522.chunk.js"
+    "static/js/runtime-main.85c1ced1.js",
+    "static/js/2.deba2e99.chunk.js",
+    "static/css/main.32ee56d2.chunk.css",
+    "static/js/main.cafcdeca.chunk.js"
   ]
 }
