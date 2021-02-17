@@ -14,19 +14,19 @@ function App() {
   const button = useRef(null);
 
   useEffect(() => {
-    const subscriber = interval(1000).subscribe(() => {
-      if (btnState === btn.pause) {
-        setStartTime(startTime + 1000);
-        setTimerTime(timerTime + 1000);
-        // return;
+    const subscriber = interval(100).subscribe(() => {
+      if (btnState === btn.stop) {
       }
-      if (btnState === btn.stop) return;
-      const currentTime = Date.now();
-      setTimerTime(currentTime - startTime);
+      if (btnState === btn.start) {
+        setTimerTime(Date.now() - startTime);
+      }
+
+      if (btnState === btn.pause) {
+      }
     });
 
     return () => subscriber.unsubscribe();
-  }, [btnState, startTime, timerTime]);
+  }, [btnState, startTime]);
 
   useEffect(() => {
     const clickStream = fromEvent(button.current, 'click');
@@ -38,11 +38,11 @@ function App() {
       )
       .subscribe(() => {
         if (btnState === btn.start) {
-          setTimerTime(Date.now() - startTime);
           setBtnState(btn.pause);
         }
         if (btnState === btn.pause) {
-          setTimerTime(Date.now() - startTime);
+          setTimerTime(Date.now() - (timerTime + startTime));
+          setBtnState(btn.start);
           setBtnState(btn.start);
         }
       });
@@ -55,18 +55,19 @@ function App() {
   const handleClickStart = () => {
     switch (btnState) {
       case btn.stop:
-        setStartTime(Date.now());
+        setStartTime(Date.now() + timerTime);
         setBtnState(btn.start);
         break;
 
       case btn.pause:
+        // const deltaTime = Date.now() - startTime - timerTime;
+        setTimerTime(Date.now() - (timerTime + startTime));
         setBtnState(btn.start);
         break;
 
       case btn.start:
+        setTimerTime(timerTime);
         setBtnState(btn.stop);
-
-        setTimerTime(0);
         break;
 
       default:
