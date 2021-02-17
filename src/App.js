@@ -14,15 +14,19 @@ function App() {
   const button = useRef(null);
 
   useEffect(() => {
-    if (btnState !== btn.start) return;
-
     const subscriber = interval(1000).subscribe(() => {
+      if (btnState === btn.pause) {
+        setStartTime(startTime + 1000);
+        setTimerTime(timerTime + 1000);
+        // return;
+      }
+      if (btnState === btn.stop) return;
       const currentTime = Date.now();
       setTimerTime(currentTime - startTime);
     });
 
     return () => subscriber.unsubscribe();
-  }, [btnState, startTime]);
+  }, [btnState, startTime, timerTime]);
 
   useEffect(() => {
     const clickStream = fromEvent(button.current, 'click');
@@ -34,11 +38,11 @@ function App() {
       )
       .subscribe(() => {
         if (btnState === btn.start) {
-          const currentTime = Date.now();
-          setTimerTime(currentTime - startTime);
+          setTimerTime(Date.now() - startTime);
           setBtnState(btn.pause);
         }
         if (btnState === btn.pause) {
+          setTimerTime(Date.now() - startTime);
           setBtnState(btn.start);
         }
       });
@@ -46,7 +50,7 @@ function App() {
     return () => {
       subscriber.unsubscribe();
     };
-  }, [btnState]);
+  }, [btnState, startTime]);
 
   const handleClickStart = () => {
     switch (btnState) {
