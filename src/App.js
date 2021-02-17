@@ -7,7 +7,9 @@ import { debounceTime, buffer, filter } from 'rxjs/operators';
 import { fromEvent, interval } from 'rxjs';
 
 function App() {
-  const [time, setTime] = useState(0);
+  const [timerTime, setTimerTime] = useState(0);
+  const [startTime, setStartTime] = useState(0);
+
   const [btnState, setBtnState] = useState(btn.stop);
   const button = useRef(null);
 
@@ -15,11 +17,12 @@ function App() {
     if (btnState !== btn.start) return;
 
     const subscriber = interval(1000).subscribe(() => {
-      setTime(time + 1);
+      const currentTime = Date.now();
+      setTimerTime(currentTime - startTime);
     });
 
     return () => subscriber.unsubscribe();
-  }, [btnState, time]);
+  }, [btnState, startTime]);
 
   useEffect(() => {
     const clickStream = fromEvent(button.current, 'click');
@@ -30,9 +33,14 @@ function App() {
         filter(({ length }) => length === 2),
       )
       .subscribe(() => {
-        btnState === btn.start
-          ? setBtnState(btn.pause)
-          : setBtnState(btn.start);
+        if (btnState === btn.start) {
+          const currentTime = Date.now();
+          setTimerTime(currentTime - startTime);
+          setBtnState(btn.pause);
+        }
+        if (btnState === btn.pause) {
+          setBtnState(btn.start);
+        }
       });
 
     return () => {
@@ -43,6 +51,7 @@ function App() {
   const handleClickStart = () => {
     switch (btnState) {
       case btn.stop:
+        setStartTime(Date.now());
         setBtnState(btn.start);
         break;
 
@@ -52,7 +61,8 @@ function App() {
 
       case btn.start:
         setBtnState(btn.stop);
-        setTime(0);
+
+        setTimerTime(0);
         break;
 
       default:
@@ -68,14 +78,20 @@ function App() {
       <main>
         <div className="wrapper">
           <h1 className="title">Stopwatch</h1>
-          <p className="timer">{getTimeString(time)}</p>
+          <p className="timer">{getTimeString(timerTime)}</p>
           <button className="button" onClick={() => handleClickStart()}>
             Start/Stop
           </button>
           <button className="button" ref={button}>
             Wait
           </button>
-          <button className="button" onClick={() => setTime(0)}>
+          <button
+            className="button"
+            onClick={() => {
+              setTimerTime(0);
+              setStartTime(Date.now());
+            }}
+          >
             Reset
           </button>
         </div>
