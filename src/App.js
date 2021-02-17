@@ -15,22 +15,15 @@ function App() {
 
   useEffect(() => {
     const subscriber = interval(100).subscribe(() => {
-      if (btnState === btn.stop) {
-      }
       if (btnState === btn.start) {
         setTimerTime(Date.now() - startTime);
       }
-
-      if (btnState === btn.pause) {
-      }
     });
-
     return () => subscriber.unsubscribe();
   }, [btnState, startTime]);
 
   useEffect(() => {
     const clickStream = fromEvent(button.current, 'click');
-
     const subscriber = clickStream
       .pipe(
         buffer(clickStream.pipe(debounceTime(300))),
@@ -39,11 +32,6 @@ function App() {
       .subscribe(() => {
         if (btnState === btn.start) {
           setBtnState(btn.pause);
-        }
-        if (btnState === btn.pause) {
-          setTimerTime(Date.now() - (timerTime + startTime));
-          setBtnState(btn.start);
-          setBtnState(btn.start);
         }
       });
 
@@ -60,13 +48,14 @@ function App() {
         break;
 
       case btn.pause:
-        // const deltaTime = Date.now() - startTime - timerTime;
-        setTimerTime(Date.now() - (timerTime + startTime));
+        const currentTime = Date.now();
+        const timeBetween = currentTime - startTime - timerTime;
+        setStartTime(startTime + timeBetween);
         setBtnState(btn.start);
         break;
 
       case btn.start:
-        setTimerTime(timerTime);
+        setTimerTime(0);
         setBtnState(btn.stop);
         break;
 
