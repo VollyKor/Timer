@@ -67,7 +67,7 @@ function App() {
       </header>
       <main>
         <div className="wrapper">
-          <h1 className="title">Секундомер</h1>
+          <h1 className="title">Stopwatch</h1>
           <p className="timer">{getTimeString(time)}</p>
           <button className="button" onClick={() => handleClickStart()}>
             Start/Stop
@@ -81,7 +81,7 @@ function App() {
         </div>
       </main>
       <footer className="footterWrapper">
-        <a className="githubLink" href="https://VollyKor.github.io/timer">
+        <a className="githubLink" href="https://github.com/VollyKor">
           GitHub Link
         </a>
       </footer>
